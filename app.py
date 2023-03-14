@@ -97,11 +97,10 @@ class Main(customtkinter.CTk):
         account_name = self.text_input.get("1.0", "end-1c")
         scrapperThread = threading.Thread(target=scrapper.Scrapper(account_name, self.n_post))
         scrapperThread.start()
+        scrapperThread.join()
 
         # Input
-
-        # self.doc = self.join_comments(account_name)
-        self.doc = "Sudah nyobain yang rasa story berry romancheese 2 enakkk bangettt + topping cincau sea salt cream, Enak banget barusan gw coba rasanya melting banget, Roman cheese enak bangettt kayk rasa cheese cake, Min Terlalu Enak Min Jadi Ketagihan,"
+        self.doc = self.join_comments(account_name)
 
         # Pre-Processing
         self.doc = self.doc.lower()

@@ -263,7 +263,7 @@ class KeyBERT:
             for word in str.split(bigram_word):
                 if word in data and word not in verb:
                     noun_adj_keywords.append((bigram_word, value))
-                    if len(noun_adj_keywords)+1 > top_n:
+                    if len(noun_adj_keywords) + 1 > top_n:
                         return noun_adj_keywords
                     break
 

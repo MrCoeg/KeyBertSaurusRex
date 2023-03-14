@@ -1,9 +1,5 @@
 .env
-data/*.json
-requirements.txt
-model.py
-main.py
-helper.py
+instagram_scrapper/data/*.json
 README.md
 .idea
 __pycache__/

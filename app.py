@@ -6,10 +6,9 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 from keybert import KeyBERT
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-import main as scrapper
+import instagram_scrapper.main as scrapper
 import threading
 import customtkinter
-
 
 
 class Settings(customtkinter.CTkScrollableFrame):
@@ -73,22 +72,22 @@ class Main(customtkinter.CTk):
     # add methods to app
     def button_callback(self):
 
-        #Thread
-        account_name  = self.text_input.get("1.0","end-1c")
+        # Thread
+        account_name = self.text_input.get("1.0", "end-1c")
         # scrapperThread = threading.Thread(target=scrapper.Scraper(account_name))
         # scrapperThread.start()
 
-        #Input
+        # Input
 
         # self.doc = self.join_comments(account_name)
         self.doc = "Sudah nyobain yang rasa story berry romancheese 2 enakkk bangettt + topping cincau sea salt cream, Enak banget barusan gw coba rasanya melting banget, Roman cheese enak bangettt kayk rasa cheese cake, Min Terlalu Enak Min Jadi Ketagihan,"
 
-        #Pre-Processing
+        # Pre-Processing
         self.doc = self.doc.lower()
         self.doc = self.doc.replace(",", ".")
 
         regex_pattern = r'\B(#|@)\w+|[^\w\s,.]'
-        self.doc = re.sub(regex_pattern,'',self.doc)
+        self.doc = re.sub(regex_pattern, '', self.doc)
         self.remove_duplicates()
 
         factory = StopWordRemoverFactory()
@@ -99,13 +98,16 @@ class Main(customtkinter.CTk):
         stemming = factory.create_stemmer()
         self.doc = stemming.stem(self.doc)
 
-        #Model Extraction
-        keywords = self.kw_model.extract_keywords(docs=self.doc, keyphrase_ngram_range=(2, 2), stop_words=['yang','yg'], top_n=int(self.n_top.get("1.0","end-1c")))
+        # Model Extraction
+        keywords = self.kw_model.extract_keywords(docs=self.doc, keyphrase_ngram_range=(2, 2),
+                                                  stop_words=['yang', 'yg'], top_n=int(self.n_top.get("1.0", "end-1c")))
 
-        #GUI
+        # GUI
         self.delete_output()
         for item, value in sorted(keywords, key=lambda x: x[1], reverse=True):
-            self.key_output.append(customtkinter.CTkButton(self.home_frame, text=f'{item}', font=customtkinter.CTkFont(family="Century Gothic", size=12, weight="bold")))
+            self.key_output.append(customtkinter.CTkButton(self.home_frame, text=f'{item}',
+                                                           font=customtkinter.CTkFont(family="Century Gothic", size=12,
+                                                                                      weight="bold")))
         self.draw_output()
 
     def remove_duplicates(self):
@@ -123,10 +125,10 @@ class Main(customtkinter.CTk):
         i = 5
         for key in self.key_output:
             key.configure(state="disabled", fg_color="#DDF7E3", text_color="#DF2E38")
-            key.grid(row=i, column=0, padx=20, pady=(20,0))
+            key.grid(row=i, column=0, padx=20, pady=(20, 0))
             i += 1
             if i == 8:
-                i = (i%10) + 5
+                i = (i % 10) + 5
 
     def delete_output(self):
         for key in self.key_output:
@@ -150,6 +152,7 @@ class Main(customtkinter.CTk):
                 #     strs.append(replies["text"])
 
         return ', '.join(strs)
+
 
 if __name__ == '__main__':
     main = Main()

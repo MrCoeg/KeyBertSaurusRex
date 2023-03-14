@@ -62,14 +62,14 @@ class Main(customtkinter.CTk):
         self.n_top_label = customtkinter.CTkLabel(self.navigation_frame, text=f'N-Top : {self.n_top}')
         self.n_top_label.grid(row=3, column=0, padx=20, pady=10)
 
-        self.slider = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_top_event)
-        self.slider.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER)
+        self.slider_n = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_top_event)
+        self.slider_n.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER)
 
         self.n_post_label = customtkinter.CTkLabel(self.navigation_frame, text=f'N-Post : {self.n_post}')
         self.n_post_label.grid(row=4, column=0, padx=20, pady=10)
 
-        self.slider = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_post_event)
-        self.slider.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
+        self.slider_post = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_post_event)
+        self.slider_post.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
 
         self.home_frame_button_1 = customtkinter.CTkButton(self.navigation_frame, text="Generate Keywords",
                                                            command=self.button_callback)
@@ -88,7 +88,7 @@ class Main(customtkinter.CTk):
     def n_post_event(self, value):
         self.n_post = int(value)
         self.n_post_label = customtkinter.CTkLabel(self.navigation_frame, text=f'N-Post : {self.n_post}')
-        self.n_post_label.grid(row=3, column=0, padx=20, pady=10)
+        self.n_post_label.grid(row=4, column=0, padx=20, pady=10)
 
     # add methods to app
     def button_callback(self):

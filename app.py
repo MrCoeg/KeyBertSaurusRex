@@ -62,13 +62,13 @@ class Main(customtkinter.CTk):
         self.n_top_label = customtkinter.CTkLabel(self.navigation_frame, text=f'N-Top : {self.n_top}')
         self.n_top_label.grid(row=3, column=0, padx=20, pady=10)
 
-        self.slider_n = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_top_event)
+        self.slider_n = customtkinter.CTkSlider(self.navigation_frame, from_=1, to=10, command=self.n_top_event)
         self.slider_n.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER)
 
         self.n_post_label = customtkinter.CTkLabel(self.navigation_frame, text=f'N-Post : {self.n_post}')
         self.n_post_label.grid(row=4, column=0, padx=20, pady=10)
 
-        self.slider_post = customtkinter.CTkSlider(self.navigation_frame, from_=0, to=10, command=self.n_post_event)
+        self.slider_post = customtkinter.CTkSlider(self.navigation_frame, from_=1, to=10, command=self.n_post_event)
         self.slider_post.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
 
         self.home_frame_button_1 = customtkinter.CTkButton(self.navigation_frame, text="Generate Keywords",
@@ -95,7 +95,7 @@ class Main(customtkinter.CTk):
 
         # Thread
         account_name = self.text_input.get("1.0", "end-1c")
-        scrapperThread = threading.Thread(target=scrapper.Scrapper(account_name, self.n_post))
+        scrapperThread = threading.Thread(target=scrapper.Scrapper(account_name, self.n_post-1))
         scrapperThread.start()
         scrapperThread.join()
 

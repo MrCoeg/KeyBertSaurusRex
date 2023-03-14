@@ -1,0 +1,9 @@
+.env
+data/*.json
+requirements.txt
+model.py
+main.py
+helper.py
+README.md
+.idea
+__pycache__/

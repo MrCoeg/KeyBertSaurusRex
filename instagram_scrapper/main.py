@@ -46,7 +46,7 @@ def escape_after_login(driver):
     turn_on_notification_btn.click()
 
 
-def get_user(driver, username):
+def get_user(driver, username, post_count):
     user = User(username)
 
     driver.get("https://www.instagram.com/" + username)
@@ -61,9 +61,9 @@ def get_user(driver, username):
         post_code = re.search(post_code_pattern, href).group(1)
         post_codes.append(post_code)
 
-    itr = len(post_codes)
-    if itr > 4:
-        itr = 4
+    itr = post_count
+    # if itr > 4:
+    #     itr = 4
 
     for code in post_codes:
         if itr < 0:
@@ -147,7 +147,7 @@ def join_comments(username):
     return ', '.join(strs)
 
 
-def main():
+def Scrapper(target_username, post_count):
     load_dotenv()
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -159,7 +159,7 @@ def main():
     escape_after_login(driver)
     time.sleep(5)
 
-    data = get_user(driver, os.environ.get('INSTAGRAM_TARGET_USERNAME'))
+    data = get_user(driver, target_username, post_count)
     driver.quit()
     json_str = json.dumps(data, cls=MyEncoder, indent=2)
 
